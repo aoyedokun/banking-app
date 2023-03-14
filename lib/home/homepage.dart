@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:new_learn/activities/buy%20airtime.dart';
 
+import '../activities/transfer_screen.dart';
 import '../hamburger/drawer_tile.dart';
+
 
 
 
@@ -29,15 +32,13 @@ class _HomePageState extends State<HomePage> {
     ]
     ),
         drawer: Drawer_tile(),
-
         bottomNavigationBar:
         Row(
             children: [
-              buildNavBarItem(Icons.home, 0),
-              buildNavBarItem(Icons.credit_card, 1),
-              buildNavBarItem(Icons.message, 2),
-              buildNavBarItem(Icons.notifications, 3),
-              buildNavBarItem(Icons.more_horiz_outlined, 4),
+              buildNavBarItem(Icons.home,"Home", 0, ),
+              buildNavBarItem(Icons.card_membership_outlined, "Transaction",1,),
+              buildNavBarItem(Icons.person, "Profile",2, ),
+              buildNavBarItem(Icons.contact_support, "Help",3, ),
             ]
         ),
         body: Stack(
@@ -45,7 +46,7 @@ class _HomePageState extends State<HomePage> {
               Column(
                   children: [
                     Container(
-                        height: 225,
+                        height: 220,
                         width: double.infinity,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
@@ -120,220 +121,262 @@ class _HomePageState extends State<HomePage> {
                                   ],)
                                 ]
                             ),
-                          )
-                        ],)
+                          ),
+      ]
+    )
+    ),
+
+        Expanded(
+            child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                color: Color(0XFFE5E5E5),
+                child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 15.0, right: 259),
+                        child: Text(
+                          "Quick Activity", style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                            fontWeight: FontWeight
+                                .w600),
+                        ),
+                      ),
+                      SizedBox(
+                          height: 5
+                      ),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment
+                              .spaceBetween,
+                          children: [
+                            GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => BuyAirtimeScreen()),
+                                  );
+                                },
+                                child:
+                                buildActivityButton(
+                                Icons.mobile_friendly,
+                                "Buy Airtime",
+                                Colors.white.withOpacity(0.3),
+                                Color(0xFFF1546C1)
+                            ),
+                            ),
+                            buildActivityButton(
+                                Icons
+                                    .account_balance_wallet_outlined,
+                                "Pay Bills",
+                                Colors.white.withOpacity(0.3),
+                                Color(0xFFF1546C1)
+                            ),
+                          ]
+                      ),
+                      SizedBox(
+                          height: 5
+                      ),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment
+                              .spaceBetween,
+                          children: [
+                            GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => TransferScreen()),
+                                  );
+                                },
+                                child:
+                            buildActivityButton(
+                                Icons
+                                    .transit_enterexit_outlined,
+                                "Transfer",
+                                Colors.white.withOpacity(0.3),
+                                Color(0xFFF1546C1)
+                            ),
+                            ),
+                            buildActivityButton(
+                                Icons.send_to_mobile_outlined,
+                                "Buy Data",
+                                Colors.white.withOpacity(0.3),
+                                Color(0xFFF1546C1)
+                            ),
+                          ]
+                      ),
+                      SizedBox(
+                          height: 5
+                      ),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment
+                              .spaceBetween,
+                          children: [
+                            buildActivityButton(
+                                Icons.send_outlined,
+                                "FX Purchase",
+                                Colors.white.withOpacity(0.3),
+                                Color(0xFFF1546C1)
+                            ),
+                            buildActivityButton(
+                                Icons.qr_code_2,
+                                "QR Code",
+                                Colors.white.withOpacity(0.3),
+                                Color(0xFFF1546C1)
+                            ),
+                          ]
+                      ),
+                    ]
+                )
+            )
+        ),
+
+        Container(
+            color: Color(0XFFE5E5E5),
+            child: Row(
+
+                mainAxisAlignment: MainAxisAlignment
+                    .spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top:6.0, left: 10),
+                    child: Text("Transaction History",
+                      style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey,
+                          fontWeight: FontWeight
+                              .w600),
                     ),
-                    Expanded(
-                        child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 15),
-                          color: Color(0XFFE5E5E5),
+                  ),
+                  TextButton(
+                    child: Text("View All",
+                      style: TextStyle(
+                          fontSize: 14,
+                          color: Color(0xFFF24E00),
+                          fontWeight: FontWeight
+                              .w600),),
+                    onPressed: () {},
+                  ),
+                ]
+            ),
+        ),
+            SingleChildScrollView(
+            scrollDirection: Axis
+                .horizontal,
+            child: Row(
+              children: [
+                Card(),
+                Card(),
+                Card(),
+                Card(),
+              ],
+            )
+        ),
+      ]
+    ),
+
+
+
+        Positioned(
+                        top: 97,
+                        left: 55,
+                        child:
+                        Container(
+                          height: 140,
+                          width: 290,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(colors: [Color(0xFFE18354),
+                              Color(0xFFF24E00)]),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
                           child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 10.0, right: 259),
-                                  child: Text(
-                                    "Quick Activity", style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.grey,
-                                      fontWeight: FontWeight
-                                          .w600),
-                                  ),
+                            children: [
+                              SizedBox(
+                                  height: 1
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 15.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment
+                                      .spaceBetween,
+                                  children: [
+                                    Text("Current Account",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 14,
+                                          color: Colors.white,
+                                        )),
+                                    IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(Icons.settings,
+                                        color: Colors.white,),
+                                    ),
+                                  ],
                                 ),
-                                SizedBox(
-                                    height: 5
-                                ),
-                                Row(
-                                    mainAxisAlignment: MainAxisAlignment
-                                        .spaceBetween,
-                                    children: [
-                                      buildActivityButton(
-                                          Icons.mobile_friendly,
-                                          "Buy Airtime",
-                                          Colors.white.withOpacity(0.3),
-                                          Color(0xFFF1546C1)
-                                      ),
-                                      buildActivityButton(
-                                          Icons
-                                              .account_balance_wallet_outlined,
-                                          "Pay Bills",
-                                          Colors.white.withOpacity(0.3),
-                                          Color(0xFFF1546C1)
-                                      ),
-                                    ]
-                                ),
-                                SizedBox(
-                                    height: 5
-                                ),
-                                Row(
-                                    mainAxisAlignment: MainAxisAlignment
-                                        .spaceBetween,
-                                    children: [
-                                      buildActivityButton(
-                                          Icons
-                                              .transit_enterexit_outlined,
-                                          "Transfer",
-                                          Colors.white.withOpacity(0.3),
-                                          Color(0xFFF1546C1)
-                                      ),
-                                      buildActivityButton(
-                                          Icons.send_to_mobile_outlined,
-                                          "Buy Data",
-                                          Colors.white.withOpacity(0.3),
-                                          Color(0xFFF1546C1)
-                                      ),
-                                    ]
-                                ),
-                                SizedBox(
-                                    height: 5
-                                ),
-                                Row(
-                                    mainAxisAlignment: MainAxisAlignment
-                                        .spaceBetween,
-                                    children: [
-                                      buildActivityButton(
-                                          Icons.send_outlined,
-                                          "FX Purchase",
-                                          Colors.white.withOpacity(0.3),
-                                          Color(0xFFF1546C1)
-                                      ),
-                                      buildActivityButton(
-                                          Icons.qr_code_2,
-                                          "QR Code",
-                                          Colors.white.withOpacity(0.3),
-                                          Color(0xFFF1546C1)
-                                      ),
-                                    ]
-                                ),
-                                Container(
-                                    color: Color(0XFFE5E5E5),
-                                    child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment
-                                            .start,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 10.0, left: 10),
-                                            child: Text("Transaction History",
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: Colors.grey,
-                                                  fontWeight: FontWeight
-                                                      .w600),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                              height: 5
-                                          ),
-                                          SingleChildScrollView(
-                                            scrollDirection: Axis
-                                                .horizontal,
-                                            child: Row(
-                                              children: [
-                                                Card(),
-                                                Card(),
-                                                Card(),
-                                                Card(),
-                                              ],
-                                            ),
-                                          )
-                                        ]
+                              ),
+                              SizedBox(
+                                  height: 0.1
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 16.0),
+                                child: Row(
+                                  children: [
+                                    Text("534976721",
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.white,
+                                        )
                                     )
+                                  ],
                                 ),
-                              ]
+                              ),
+                              SizedBox(
+                                  height: 25
+                              ),
+
+                                  Container(
+                                    height: 40,
+                                    width: 250,
+                                    decoration: BoxDecoration(
+                                        color: Colors.transparent,
+                                        borderRadius: BorderRadius.circular(5.0),
+                                        border: Border.all(
+                                          color: Colors.blueGrey,
+                                          width: 0.6,
+                                        )
+                                    ),
+                                    child:
+                                    Center(
+                                      child: Text('₦0.00',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 18,
+                                            color: Colors.white,
+                                          )
+                                      ),
+                                    ),
+                                  )
+
+                            ],
                           ),
                         )
-                    )
-                  ]
-              ),
-              Positioned(
-                  top: 97,
-                  left: 55,
-                  child:
-                  Container(
-                      height: 140,
-                      width: 290,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(colors: [Color(0xFFE18354),
-                          Color(0xFFF24E00)]),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Column(
-                          children: [
-                            SizedBox(
-                                height: 5
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 15.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment
-                                    .spaceBetween,
-                                children: [
-                                  Text("Current Balance",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 14,
-                                        color: Colors.white,
-                                      )),
-                                  Image.asset("assets/mastercard_logo.png",
-                                  )
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                                height: 0.1
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 16.0),
-                              child: Row(
-                                children: [
-                                  Text("\#24,546,790",
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.white,
-                                      )
-                                  )
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                                height: 40
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 16.0),
-                              child: Row(
-                                children: [
-                                  Text("5464 7554 5665",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 18,
-                                        color: Colors.white,
-                                      )
-                                  ),
-                                  SizedBox(
-                                      width: 10
-                                  ),
-                                  Text("09/25",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 18,
-                                        color: Colors.white,
-                                      )
-                                  )
-                                ],
-                              ),
-                            )
-                          ]
-                      )
-                  )
-              ),
-            ]
-        )
+                    ),
+      ]
+    ),
+
+
+
+
     );
+
+
+
   }
 
-  GestureDetector buildNavBarItem(IconData icon, int index) {
+
+  GestureDetector buildNavBarItem(IconData icon, String title, int index,) {
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -344,8 +387,8 @@ class _HomePageState extends State<HomePage> {
         width: MediaQuery
             .of(context)
             .size
-            .width / 5,
-        height: 60,
+            .width / 4,
+        height: 50,
         color: Colors.white,
         child: Icon(icon,
           color: index == _selectedItemIndex ? Color(0xFFF24E00) : Colors
@@ -372,19 +415,19 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
   return Container(
-  margin: EdgeInsets.only(right: 5),
-  width: 260,
-  height: 150,
+  margin: EdgeInsets.only(right: 35),
+  width: 200,
+  height: 140,
   child: Stack(
   children: [
   Positioned(
-  right: 10,
+  right: 80,
   bottom: 0,
   child: Container(
   height: 380,
   width: 250,
   decoration: BoxDecoration(
-  gradient: LinearGradient(colors: [Colors.white,
+  gradient: LinearGradient(colors: [Colors.grey,
   Colors.white]),
   borderRadius: BorderRadius.circular(15),
   ),

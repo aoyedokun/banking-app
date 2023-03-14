@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:new_learn/login.dart';
 
@@ -191,7 +192,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       style: TextStyle(fontSize: 15),
     ),
     onPressed: () {
-      Navigator.pop(context);
       Navigator.push(context, MaterialPageRoute(
           builder: (context) => const LogIn()
       )

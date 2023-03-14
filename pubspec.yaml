@@ -39,6 +39,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   country_icons: ^2.0.2
   csc_picker: ^0.2.6
+  firebase_core: ^2.7.1
+  firebase_auth: ^4.2.10
 
 dev_dependencies:
   flutter_test:
@@ -80,6 +82,10 @@ flutter:
   - assets/ham.png
   - assets/sky.png
   - assets/black.png
+  - assets/mtn.png
+  - assets/glo.png
+  - assets/airtel.png
+  - assets/9mobile.png
 
 
 

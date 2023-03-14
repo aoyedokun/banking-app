@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "298589418354",
+    "project_id": "tech101-new-learn",
+    "storage_bucket": "tech101-new-learn.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:298589418354:android:d42e8a3de7d9093df463eb",
+        "android_client_info": {
+          "package_name": "com.example.new_learn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "298589418354-gtdnqpoe9n1ksof36qsd6fa6ik4ma294.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4DC4EamHNmUkwmYzkyv0W7uTMfYMn1V4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "298589418354-gtdnqpoe9n1ksof36qsd6fa6ik4ma294.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

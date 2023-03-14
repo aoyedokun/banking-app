@@ -1,198 +1,266 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:new_learn/onboarding.dart';
+import 'package:new_learn/services/firebase_auth_service.dart';
 
 import 'home/homepage.dart';
 
 
 class LogIn extends StatefulWidget {
-  const LogIn({Key? key}) : super(key: key);
+    const LogIn({Key? key}) : super(key: key);
 
-  @override
-  State<LogIn> createState() => _LogInState();
+    @override
+    State<LogIn> createState() => _LogInState();
 }
 
 class _LogInState extends State<LogIn> {
 
-  bool _isObscure = true;
-    @override
 
+
+
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+
+  bool _obscureText = true;
+
+    @override
     Widget build(BuildContext context) {
-      var screenSize = MediaQuery.of(context).size;
-      return Scaffold(
-          resizeToAvoidBottomInset: false,
-          extendBodyBehindAppBar: false,
-          appBar: AppBar(
+        var screenSize = MediaQuery.of(context).size;
+        return Scaffold(
+            resizeToAvoidBottomInset: false,
+            extendBodyBehindAppBar: false,
+            appBar: AppBar(
+                title: Text('LogIn'),
             automaticallyImplyLeading: false,
             leading: GestureDetector(
-              onTap: () {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => OnboardingScreen()));
+            onTap: () {
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (_) => OnboardingScreen()),
+            );
+        },
+        child: Icon(
+        Icons.cancel,
+        color: Colors.white,
+        ),
+        ),
+        backgroundColor: Color(0xFFF24E00),
+        ),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+        Padding(
+        padding: const EdgeInsets.only(left: 20.0, top: 20),
+        child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+        Text(
+        "Welcome Back",
+        style: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        color: Color(0xFFF24E00),
+        ),
+        ),
+        Image.asset(
+        "assets/Logo.png",
+        height: 60,
+        width: 60,
+        ),
+        ],
+        ),
+        ),
+              Padding(padding: EdgeInsets.symmetric(horizontal:20),
+              child: Column(
+                children:<Widget>[
+                  inputFile(
+                      label: "Email", hintStyle: TextStyle(color: Colors.grey, fontSize: 12),
+                     controller: _emailController,
+                    validator: (value) {
+                      bool emailValid = RegExp(
+                          r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value!);
 
-      },
+                      if (value!.isEmpty) {
+                        return 'Please enter your correct address';
+                      }
 
-                  child:
-                  Icon(
-                    Icons.cancel,
-                    color: Colors.black45,
-                  )
-      ),
-              backgroundColor: Color(0x86FFFFFF),
+                      else if (!emailValid) {
+                          return 'Please enter a valid email address';
+                        }
+                      }
+                      ),
 
+                  SizedBox(
+                      height: 13
+                  ),
+              inputFile(label: "password", hintStyle: TextStyle(color: Colors.grey, fontSize: 12),
+                  obscureText: _obscureText, toggleVisibility: (){
+                setState(() {
+                  _obscureText = !_obscureText;
+                });
+              },
+                controller: _passwordController,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter your password';
+                    }
+                    else if (value.length < 8) {
+                      return 'Password must be at least 8 characters long';
+                    }
+
+      }
+              ),
+                ],
+              ),
+              ),
+        SizedBox(
+        height: 10,
+        ),
+              Center(
+                child: Text(
+                    "Forgot password?",
+        style: TextStyle(color: Colors.black),
+        ),
+              ),
+
+        SizedBox(
+        height: 35,
+        ),
+
+        Center(
+            child: Container(
+            height: 55,
+            width: 350,
+            decoration: BoxDecoration(
+            color: Color(0XFFF24E00),
+            borderRadius: BorderRadius.circular(30),
             ),
-          body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+            child: TextButton(
+            onPressed: () async{
+              try {
+                await FirebaseAuthService().signup(
+                    _emailController.text.trim(),
+                    _passwordController.text.trim());
 
-          children: [
-          Padding(
-          padding: const EdgeInsets.only(left:20.0, top: 20),
-          child:
-          Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-          Text("Login",
-          style: TextStyle(
-          fontSize: 30,
-          fontWeight: FontWeight.bold,
-          color: Color(0xFFF24E00),
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+              }
+              on FirebaseException catch (e) {
+                print(e.message);
+              }
+            },
+
+                child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:[
+              Text(
+              "Log In",
+              style: TextStyle(fontSize: 15, color: Colors.white),
+              ),
+              SizedBox(height: 5,
+              ),
+              ]
+              )
+              ),
+              ),
+        ),
+            Container(
+            width: 250,
+            margin: EdgeInsets.only(top: 15, left: 60, right: 20),
+
+            child: RichText(
+            textAlign: TextAlign.center,
+            text: TextSpan(
+            text: "Don't have an account?  ",
+            style: TextStyle(color: Colors.black),
+            children: [
+            TextSpan(
+            text: "Sign up",
+            style: TextStyle(color:Color(0xFFF24E00)),
+            ),
+            ]
+            ),
+            )
+            )
+              ]
+      ),
           )
-          ),
-          Image.asset("assets/Logo.png",
-          height: 60,
-          width: 60,
-          ),
-          ]
-          ),
-          ),
-
-          Padding(
-          padding: const EdgeInsets.only(left:20.0),
-          child: Text(
-          "Welcome",
-          style: TextStyle(
-          color: Colors.black,
-          fontSize: 15,
-
-          )
-          ),
-          ),
-
-
-          Container(
-          width: 350,
-          margin: const EdgeInsets.only(top: 50, left: 20, right: 20),
-          child: Form(
-          child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children:[
-          Padding(
-          padding: const EdgeInsets.all(1),
-          child: TextFormField(
-          decoration: const InputDecoration(
-          hintText: 'Fullname',
-          hintStyle: TextStyle(color: Colors.black12),
-          border: OutlineInputBorder(
-          )
-          )
-          ),
-          ),
-
-          SizedBox(
-          height: 20,
-          ),
-          TextFormField(
-          obscureText: _isObscure,
-          decoration: InputDecoration(
-          hintText: 'Password',
-          hintStyle: TextStyle(color: Colors.black12),
-          suffixIcon: IconButton(
-          icon: Icon(_isObscure ? Icons.visibility_off_rounded : Icons.visibility_rounded),
-          onPressed: () {
-          setState(() {
-          _isObscure = !_isObscure;
-          });
-          },
-          ),
-
-
-
-
-          border: OutlineInputBorder(
-
-          )
-          )
-          ),
-          SizedBox(height: 10,
-          ),
-          Container(
-          child: RichText(
-          textAlign: TextAlign.center,
-          text: TextSpan(
-          text: "Forgot password?",
-          style: TextStyle(color: Colors.black),
-
-          )
-          ),
-          ),
-          SizedBox(
-          height: 35,
-          ),
-          Padding(padding: EdgeInsets.all(8.0)),
-          Container(
-          height: 55,
-          width: 350,
-          decoration: BoxDecoration(
-          color: Color(0XFFF24E00),
-          borderRadius: BorderRadius.circular(30),
-          ),
-          child:
-          TextButton(
-          onPressed: () {
-          Navigator.pop(context);
-          Navigator.push(context, MaterialPageRoute(
-          builder: (context) => const HomePage()
-          )
+      )
           );
-          },
-
-          child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:[
-          Text(
-          "Log In",
-          style: TextStyle(fontSize: 15, color: Colors.white),
-          ),
-          SizedBox(height: 5,
-          ),
-          ]
-          )
-          ),
-          ),
-          Container(
-          width: 250,
-          margin: EdgeInsets.only(top: 15, left: 60, right: 20),
-
-          child: RichText(
-          textAlign: TextAlign.center,
-          text: TextSpan(
-          text: "Dont have an account?  ",
-          style: TextStyle(color: Colors.black),
-          children: [
-          TextSpan(
-          text: "Sign up",
-          style: TextStyle(color:Color(0xFFF24E00)),
-          ),
-          ]
-          ),
-          )
-          )
-          ]
-          )
-          )
-          )
-          ]
-          )
-          );
-
         }
             }
+
+            Widget inputFile({label, obscureText = false, toggleVisibility,
+              hintStyle, TextEditingController? controller ,  FormFieldValidator<String>? validator}) {
+              bool isValid = true;
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                Text(
+                label,
+                style: TextStyle(fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xdd1d1d1e)),
+              ),
+              SizedBox(
+              height: 5,
+              ),
+              TextFormField(
+              obscureText: obscureText,
+                  controller: controller,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) {
+
+                  String? errorMessage = validator?.call(value);
+                  isValid = errorMessage == null;
+                  return errorMessage;
+                },
+              decoration: InputDecoration(
+              contentPadding: EdgeInsets.symmetric(vertical:0,
+              horizontal:10),
+              filled: true,
+              fillColor: Color(0x6fb7bac0),
+              border: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(
+              const Radius.circular(10.0),
+              ),
+              borderSide: BorderSide(
+              width: 0,
+              style: BorderStyle.none,
+              )
+              ),
+                suffixIcon: label == "password"
+                    ? obscureText
+                    ? IconButton(
+                  icon: Icon(
+                    Icons.visibility_off_rounded,
+                    color: Colors.black38,
+                  ),
+                  onPressed: toggleVisibility,
+                )
+                    : IconButton(
+                  icon: Icon(
+                    Icons.visibility_rounded,
+                    color: Colors.black38,
+                  ),
+                  onPressed: toggleVisibility,
+                )
+                    : null,
+              hintText: label,
+              hintStyle: hintStyle,
+              ),
+              ),
+              ]
+              );
+
+
+
+            }
+
+
+
+
+
 

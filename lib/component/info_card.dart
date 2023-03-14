@@ -6,10 +6,10 @@ class InfoCard extends StatelessWidget {
   const InfoCard({
     Key? key,
     required this.name,
-    required this.profession,
+    required this.accountnumber,
   }) : super(key: key);
 
-  final String name, profession;
+  final String name, accountnumber;
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -22,7 +22,7 @@ class InfoCard extends StatelessWidget {
     title: Text(name,
     style: const TextStyle(color:Colors.black),
     ),
-    subtitle: Text(profession,
+    subtitle: Text(accountnumber,
     style: const TextStyle(color:Colors.black54),
     ),
     );

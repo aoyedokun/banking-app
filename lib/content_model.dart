@@ -12,8 +12,8 @@ List<OnboardingContent> contents = [
 OnboardingContent(
 title: 'Welcome to Ace',
 image: 'assets/onboard 1.png',
-discription: "We offer the best and safest\n"
-    "vote for you"
+discription: "We offer the best and secure\n"
+    " app for you"
 ),
 OnboardingContent(
 title: 'Personalized for you',
