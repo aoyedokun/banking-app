@@ -31,7 +31,8 @@ class _TransferScreenState extends State<TransferScreen> {
         backgroundColor: Color(0xFFF24E00),
       ),
 
-      body:
+      body: SingleChildScrollView(
+    child:
        Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -54,10 +55,10 @@ class _TransferScreenState extends State<TransferScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-      Text("Other Bank",
+      Text("Select bank",
       style: TextStyle(
       fontSize: 14,
-      color: Colors.white),
+      color: Colors.black12),
       ),
       IconButton(
       onPressed: () {
@@ -68,7 +69,7 @@ class _TransferScreenState extends State<TransferScreen> {
       );
       },
       icon: const Icon(Icons.search,
-          color: Colors.white),
+          color: Colors.black12),
       )
               ]
       ),
@@ -95,18 +96,42 @@ class _TransferScreenState extends State<TransferScreen> {
             SizedBox(
               height: 20,
             ),
-         Column(
+         Row(
+             mainAxisAlignment: MainAxisAlignment.spaceBetween,
              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right:255.0),
-                  child: Text(
+               Padding(
+                   padding: const EdgeInsets.only(left:18.0,),
+                   child:
+                   Text(
                       "Account Number",
                       style: TextStyle(fontSize: 12,
                           color: Color(0xdd1d1d1e)),
                     ),
-                ),
-          ]
-        ),
+               ),
+               SizedBox(
+                 width: 10,
+               ),
+               Padding(
+                   padding: const EdgeInsets.only(right:10.0),
+                   child:
+                TextButton(
+                   onPressed: () {
+
+                   },
+                   child: Text(
+                     "Select beneficiary",
+                     style: TextStyle(
+                       fontSize: 10,
+                       fontWeight: FontWeight.w500,
+                       color: Color(0XFFF24E00),
+                     ),
+                   ),
+                 ),
+               )
+      ]
+               ),
+
+
 
 
               SizedBox(
@@ -199,8 +224,8 @@ class _TransferScreenState extends State<TransferScreen> {
             width: 350,
             height: 50,
             child: TextFormField(
-                controller: _amountController,
-                keyboardType: TextInputType.number,
+                controller: _remarksController,
+                keyboardType: TextInputType.multiline,
                 decoration: const InputDecoration(
                   filled: true,
                   fillColor: Color(0x6fb7bac0),
@@ -239,7 +264,7 @@ class _TransferScreenState extends State<TransferScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children:[
                     Text(
-                      "Transfer",
+                      "Continue",
                       style: TextStyle(fontSize: 15, color: Colors.white),
                     ),
                   ]
@@ -253,9 +278,9 @@ class _TransferScreenState extends State<TransferScreen> {
 
             ]
       ),
-    ]
+      ]
     )
-
+      )
     );
   }
 }

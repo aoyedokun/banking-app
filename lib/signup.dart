@@ -22,8 +22,9 @@ class _SignUpState extends State<SignUp> {
 
   bool _obscureText = true;
   bool agree = true;
+  bool _isAuthenticating = false;
 
- @override
+  @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
@@ -177,21 +178,32 @@ class _SignUpState extends State<SignUp> {
         color: Color(0XFFF24E00),
         borderRadius: BorderRadius.circular(30),
         ),
-        child:
-        TextButton(
+        child:  _isAuthenticating // display loading widget when authenticating
+            ? Center(
+          child: CircularProgressIndicator(
+            valueColor:
+            AlwaysStoppedAnimation<Color>(Colors.white),
+          ),
+        )
+            : TextButton(
         onPressed: () async{
-
+          setState(() {
+            _isAuthenticating = true;
+          });
           try {
             await FirebaseAuthService().signup(
                 _emailController.text.trim(),
                 _passwordController.text.trim());
+    Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
           }
           on FirebaseException catch (e) {
             print(e.message);
+          } finally {
+            setState(() {
+              _isAuthenticating = false;
+            });
           }
-
-   Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
-   },
+    },
 
 
 
@@ -210,26 +222,37 @@ class _SignUpState extends State<SignUp> {
         ),
         ),
       ),
-
+          GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LogIn()),
+                );
+              },
+child:
       Container(
       width: 250,
-      margin: EdgeInsets.only(top: 15, left: 60, right: 20),
       child:
-      RichText(
-      textAlign: TextAlign.center,
+      Padding(
+        padding: const EdgeInsets.only(top:20.0),
 
-      text: TextSpan(
-      text: "Have an account already ?  ",
-      style: TextStyle(color: Colors.black),
-      children: [
-      TextSpan(
-      text: "Login",
-      style: TextStyle(color:Color(0xFFF24E00)),
-      ),
-      ]
-      ),
+        child: RichText(
+        textAlign: TextAlign.center,
+
+        text: TextSpan(
+        text: "Have an account already ?  ",
+        style: TextStyle(color: Colors.black),
+        children: [
+        TextSpan(
+        text: "Login",
+        style: TextStyle(color:Color(0xFFF24E00)),
+        ),
+        ]
+        ),
+        ),
       )
       )
+          )
                 ]
       )
     )

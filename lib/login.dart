@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:new_learn/onboarding.dart';
 import 'package:new_learn/services/firebase_auth_service.dart';
+import 'package:new_learn/signup.dart';
 
 import 'home/homepage.dart';
 
@@ -23,6 +24,7 @@ class _LogInState extends State<LogIn> {
   final TextEditingController _emailController = TextEditingController();
 
   bool _obscureText = true;
+  bool _isAuthenticating = false;
 
     @override
     Widget build(BuildContext context) {
@@ -138,8 +140,18 @@ class _LogInState extends State<LogIn> {
             color: Color(0XFFF24E00),
             borderRadius: BorderRadius.circular(30),
             ),
-            child: TextButton(
-            onPressed: () async{
+            child:_isAuthenticating // display loading widget when authenticating
+                ? Center(
+              child: CircularProgressIndicator(
+                valueColor:
+                AlwaysStoppedAnimation<Color>(Colors.white),
+              ),
+            )
+            :TextButton(
+            onPressed: () async {
+              setState(() {
+                _isAuthenticating = true;
+              });
               try {
                 await FirebaseAuthService().signup(
                     _emailController.text.trim(),
@@ -149,9 +161,12 @@ class _LogInState extends State<LogIn> {
               }
               on FirebaseException catch (e) {
                 print(e.message);
+              } finally {
+                setState(() {
+                  _isAuthenticating = false;
+                });
               }
             },
-
                 child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children:[
@@ -166,24 +181,37 @@ class _LogInState extends State<LogIn> {
               ),
               ),
         ),
-            Container(
-            width: 250,
-            margin: EdgeInsets.only(top: 15, left: 60, right: 20),
-
-            child: RichText(
-            textAlign: TextAlign.center,
-            text: TextSpan(
-            text: "Don't have an account?  ",
-            style: TextStyle(color: Colors.black),
-            children: [
-            TextSpan(
-            text: "Sign up",
-            style: TextStyle(color:Color(0xFFF24E00)),
-            ),
-            ]
-            ),
+          GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SignUp()),
+                );
+              },
+              child:
+            Center(
+              child: Container(
+              width: 250,
+                  child:
+                  Padding(
+                    padding: const EdgeInsets.only(top:20.0),
+                    child: RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+              text: "Don't have an account?  ",
+              style: TextStyle(color: Colors.black),
+              children: [
+              TextSpan(
+              text: "Sign up",
+              style: TextStyle(color:Color(0xFFF24E00)),
+              ),
+              ]
+              ),
+              ),
+                  )
+              ),
             )
-            )
+          )
               ]
       ),
           )
