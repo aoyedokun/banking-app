@@ -15,8 +15,8 @@ class _Drawer_tileState extends State<Drawer_tile> {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          UserAccountsDrawerHeader(accountName: Text("Ethan Eleyinmi"),
-      accountEmail: Text ("rafiat.oyedokun@gmail.com"),
+          UserAccountsDrawerHeader(accountName: Text("Ayo Gates"),
+      accountEmail: Text ("ayo.gates@gmail.com"),
               currentAccountPicture: CircleAvatar(
                 child: ClipOval(
                   child: Image.asset("assets/man 1.png",

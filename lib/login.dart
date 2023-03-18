@@ -28,7 +28,16 @@ class _LogInState extends State<LogIn> {
 
     @override
     Widget build(BuildContext context) {
-        var screenSize = MediaQuery.of(context).size;
+
+      final height = MediaQuery.of(context).size.height;
+
+
+      var screenSize = MediaQuery.of(context).size;
+      double screenWidth = screenSize.width;
+      double screenHeight = screenSize.height;
+
+
+
         return Scaffold(
             resizeToAvoidBottomInset: false,
             extendBodyBehindAppBar: false,
@@ -55,8 +64,9 @@ class _LogInState extends State<LogIn> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
         Padding(
-        padding: const EdgeInsets.only(left: 20.0, top: 20),
-        child: Row(
+        padding:  EdgeInsets.fromLTRB(
+            screenWidth / 20, screenHeight / 40, screenWidth / 20, 0),
+          child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
         Text(
@@ -69,21 +79,23 @@ class _LogInState extends State<LogIn> {
         ),
         Image.asset(
         "assets/Logo.png",
-        height: 60,
-        width: 60,
+        height: screenWidth / 5,
+        width: screenWidth / 5,
         ),
         ],
         ),
         ),
-              Padding(padding: EdgeInsets.symmetric(horizontal:20),
-              child: Column(
+              Padding(
+                padding:EdgeInsets.fromLTRB(
+                    screenWidth / 20, screenHeight / 40, screenWidth / 20, 0),
+                child: Column(
                 children:<Widget>[
                   inputFile(
                       label: "Email", hintStyle: TextStyle(color: Colors.grey, fontSize: 12),
                      controller: _emailController,
                     validator: (value) {
                       bool emailValid = RegExp(
-                          r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value!);
+                          r'^[\w-]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value!);
 
                       if (value!.isEmpty) {
                         return 'Please enter your correct address';
@@ -96,7 +108,7 @@ class _LogInState extends State<LogIn> {
                       ),
 
                   SizedBox(
-                      height: 13
+                      height: screenHeight / 30
                   ),
               inputFile(label: "password", hintStyle: TextStyle(color: Colors.grey, fontSize: 12),
                   obscureText: _obscureText, toggleVisibility: (){
@@ -134,8 +146,8 @@ class _LogInState extends State<LogIn> {
 
         Center(
             child: Container(
-            height: 55,
-            width: 350,
+              height: MediaQuery.of(context).size.height * 0.07,
+              width:  MediaQuery.of(context).size.width * 0.8,
             decoration: BoxDecoration(
             color: Color(0XFFF24E00),
             borderRadius: BorderRadius.circular(30),
@@ -174,7 +186,7 @@ class _LogInState extends State<LogIn> {
               "Log In",
               style: TextStyle(fontSize: 15, color: Colors.white),
               ),
-              SizedBox(height: 5,
+              SizedBox(height: height * 0.01,
               ),
               ]
               )

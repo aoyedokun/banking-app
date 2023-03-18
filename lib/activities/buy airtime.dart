@@ -20,11 +20,12 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
     super.dispose();
   }
 
-  void _buyAirtime() {
-  }
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Airtime'),
@@ -46,14 +47,14 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
           Padding(
-          padding: const EdgeInsets.only( top: 10),
+          padding: EdgeInsets.only(top: screenHeight * 0.01 ),
           child:
           Center(
           child: Padding(
-            padding: const EdgeInsets.only(top:18.0,),
+            padding: EdgeInsets.only(top:screenHeight * 0.02),
             child: Container(
-                height: 100,
-                width: 310,
+                height: screenHeight * 0.18,
+                width: screenWidth * 0.8,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(colors: [Color(0xFFE18354),
                     Color(0xFFF24E00)]),
@@ -62,11 +63,12 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
                 child: Column(
                     children: [
                       SizedBox(
-                          height: 1
+                          height: screenHeight * 0.01
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 15.0, vertical: 15),
+                        padding:  EdgeInsets.symmetric(
+                            horizontal: screenWidth * 0.05,
+                            vertical: screenHeight * 0.01),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment
                               .spaceBetween,
@@ -74,12 +76,12 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
                             Text('₦342,000.00',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
-                                  fontSize: 18,
+                                  fontSize: screenWidth * 0.045,
                                   color: Color(0xff424242),
                                 )),
                         Text("SAVINGS",
                             style: TextStyle(
-                              fontSize: 10,
+                              fontSize: screenWidth * 0.025,
                               color: Colors.white,
                             ),
                             ),
@@ -88,11 +90,11 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
                       ),
 
                       SizedBox(
-                          height: 15
+                          height: screenHeight * 0.02
                       ),
               Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 15.0),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: screenHeight * 0.05),
                       child: Row(
                          crossAxisAlignment: CrossAxisAlignment.start,
                            children: [
@@ -100,14 +102,14 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
                                  text: TextSpan(
                                  text: "Account No:",
                                  style: TextStyle(
-                                   fontSize: 12,
+                                   fontSize: screenWidth * 0.025,
                                      color: Colors.black26),
 
                                  children: [
                                    TextSpan(
                                      text: "  53497721",
                                      style: TextStyle(
-                                       fontSize: 12,
+                                       fontSize: screenWidth * 0.025,
                                        color: Colors.white,
                                    ),
                            )
@@ -126,11 +128,11 @@ class _BuyAirtimeScreenState extends State<BuyAirtimeScreen> {
           ),
 
 SizedBox(
-  height: 15,
+  height: screenHeight * 0.01,
 ),
 
                   Padding(
-                    padding: const EdgeInsets.only(left:11.0),
+                    padding:  EdgeInsets.only(left: screenWidth * 0.03),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -138,7 +140,7 @@ SizedBox(
                       Text(
                       "Select Network",
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: screenWidth < 600 ? 14 : 16,
                         color: Colors.black,
                       ),
                     ),
@@ -146,49 +148,50 @@ SizedBox(
       ),
                   ),
                 SizedBox(
-                  height: 10,
+                  height: screenHeight * 0.02,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Image.asset('assets/mtn.png',
-                   width:70,
-                      height: 70,
+                      width: screenWidth * 0.2,
+                      height: screenWidth * 0.2,
                     ),
                     Image.asset('assets/glo.png',
-                      width:70,
-                      height: 65,
+                      width: screenWidth * 0.2,
+                      height: screenWidth * 0.18,
                     ),
                     Image.asset('assets/9mobile.png',
-                      width: 70,
-                      height: 65,
+                      width: screenWidth * 0.2,
+                      height: screenWidth * 0.18,
                     ),
                     Image.asset('assets/airtel.png',
-                      width:70,
-                      height: 65,
+                      width: screenWidth * 0.2,
+                      height: screenWidth * 0.18,
                     ),
                   ],
                 ),
                 SizedBox(
-                  height: 45,
+                  height: screenHeight * 0.03,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                 Padding(
-                  padding: const EdgeInsets.only(left:18.0,),
+                  padding: EdgeInsets.only(left:screenWidth * 0.05,),
                   child: Text(
                     "Phone number",
-                    style: TextStyle(fontSize: 12,
+                    style: TextStyle(
+                        fontSize: screenWidth * 0.035,
                         color: Color(0xdd1d1d1e)
                     ),
                   ),
                 ),
                     SizedBox(
-                      width: 10,
+                      width: screenWidth * 0.02,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(right:10.0),
+                      padding: EdgeInsets.only(right: screenWidth * 0.04),
                       child: TextButton(
                         onPressed: () {
 
@@ -196,7 +199,7 @@ SizedBox(
                         child: Text(
                           "Select beneficiary",
                           style: TextStyle(
-                            fontSize: 10,
+                            fontSize: screenWidth < 600 ? 8 : 10,
                             fontWeight: FontWeight.w500,
                             color: Color(0XFFF24E00),
                           ),
@@ -206,12 +209,12 @@ SizedBox(
                 ]
                 ),
                 SizedBox(
-                  height: 10,
+                  height: screenHeight * 0.01,
                 ),
                 Center(
                     child: SizedBox(
-                        width: 350,
-                        height: 50,
+                      width: screenWidth * 0.9,
+                      height: screenHeight * 0.09,
                             child: Stack(
                               children: [
                                 TextFormField(
@@ -234,8 +237,8 @@ SizedBox(
                               )
                                 ),
                       Positioned(
-                        top: 19,
-                        right: 10,
+                        top: screenHeight * 0.040,
+                        right: screenWidth * 0.04,
                         child:
                                 GestureDetector(
                                   onTap: () {
@@ -244,7 +247,7 @@ SizedBox(
                                   child: Icon(
                                     Icons.perm_contact_cal_outlined,
                                     color:  Color.fromRGBO(242, 78, 0, 0.5),
-                                    size: 15,
+                                    size: screenWidth < 600 ? 12 : 15,
                                   ),
                                 ),
                       )
@@ -254,23 +257,23 @@ SizedBox(
                 ),
 
                 SizedBox(
-                  height: 19,
+                  height: screenHeight * 0.03,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left:18.0,),
+                  padding: EdgeInsets.only(left: screenWidth * 0.05,),
                   child: Text(
                     "Amount",
-                    style: TextStyle(fontSize: 12,
+                    style: TextStyle( fontSize: screenWidth * 0.035,
                         color: Color(0xdd1d1d1e)),
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: screenHeight * 0.015,
                 ),
                 Center(
                     child: SizedBox(
-                        width: 350,
-                        height: 50,
+                width: screenWidth * 0.9,
+       height: screenHeight * 0.09,
                         child: TextFormField(
                             controller: _amountController,
                             keyboardType: TextInputType.number,
@@ -298,16 +301,16 @@ SizedBox(
 
 
                 SizedBox(
-    height: 20,
+    height: screenHeight * 0.02,
     ),
 
                     Center(
                       child: Container(
-                        height: 55,
-                        width: 350,
+    width: screenWidth * 0.9,
+    height: screenHeight * 0.09,
                         decoration: BoxDecoration(
                           color: Color(0XFFF24E00),
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(screenWidth * 0.08),
                         ),
                         child:
                         TextButton(
@@ -319,7 +322,7 @@ SizedBox(
                             children:[
                             Text(
                             "Continue",
-                            style: TextStyle(fontSize: 15, color: Colors.white),
+                            style: TextStyle(fontSize: screenWidth * 0.04, color: Colors.white),
                           ),
                           ]
                         )

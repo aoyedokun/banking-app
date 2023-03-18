@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:new_learn/activities/search_screen.dart';
 
-import '../login.dart';
+
 
 class TransferScreen extends StatefulWidget {
   @override
@@ -15,6 +15,8 @@ class _TransferScreenState extends State<TransferScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Transfer to Account'),
@@ -37,11 +39,11 @@ class _TransferScreenState extends State<TransferScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
-              height: 15
+              height: 10
             ),
             Container(
     height: 55,
-    width: 350,
+    width:  screenWidth * 0.9,
     decoration: BoxDecoration(
       color: Color(0x6fb7bac0),
 
@@ -62,7 +64,6 @@ class _TransferScreenState extends State<TransferScreen> {
       ),
       IconButton(
       onPressed: () {
-      // method to show the search bar
       showSearch(
       context: context,
       delegate: CustomSearchDelegate()
@@ -79,14 +80,14 @@ class _TransferScreenState extends State<TransferScreen> {
     )
     ),
         SizedBox(
-          height: 18,
+          height: 10,
         ),
         Container(
             decoration: BoxDecoration(
             border: Border(
             bottom: BorderSide(
             color: Colors.grey,
-            width: 1.0,
+            width: 0.8,
     )
             )
             )
@@ -94,11 +95,12 @@ class _TransferScreenState extends State<TransferScreen> {
 
 
             SizedBox(
-              height: 20,
+              height: 5,
             ),
          Row(
              mainAxisAlignment: MainAxisAlignment.spaceBetween,
              children: [
+
                Padding(
                    padding: const EdgeInsets.only(left:18.0,),
                    child:
@@ -109,12 +111,9 @@ class _TransferScreenState extends State<TransferScreen> {
                     ),
                ),
                SizedBox(
-                 width: 10,
+                 width: 25,
                ),
-               Padding(
-                   padding: const EdgeInsets.only(right:10.0),
-                   child:
-                TextButton(
+      TextButton(
                    onPressed: () {
 
                    },
@@ -127,19 +126,14 @@ class _TransferScreenState extends State<TransferScreen> {
                      ),
                    ),
                  ),
-               )
       ]
                ),
-
-
-
-
-              SizedBox(
-                height: 10,
+            SizedBox(
+                height: 5,
               ),
               Center(
                   child: SizedBox(
-                      width: 350,
+                      width:  screenWidth * 0.9,
                       height: 50,
                       child: TextFormField(
                           controller: _accountController,
@@ -147,7 +141,7 @@ class _TransferScreenState extends State<TransferScreen> {
                           decoration: const InputDecoration(
                             filled: true,
                             fillColor: Color(0x6fb7bac0),
-                            hintText: 'Enter account number',
+                            hintText: 'account number',
                             hintStyle: TextStyle(color: Colors.black12),
                             border: OutlineInputBorder(
                               borderRadius: const BorderRadius.all(
@@ -163,12 +157,12 @@ class _TransferScreenState extends State<TransferScreen> {
                   )
               ),
       SizedBox(
-        height: 19,
+        height: 9,
       ),
       Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(right:300.0),
+              padding: const EdgeInsets.only(right:243.0),
               child:  Text(
           "Amount",
           style: TextStyle(fontSize: 12,
@@ -180,7 +174,7 @@ class _TransferScreenState extends State<TransferScreen> {
       ),
       Center(
           child: SizedBox(
-            width: 350,
+            width:  screenWidth * 0.9,
             height: 50,
             child: TextFormField(
                 controller: _amountController,
@@ -204,12 +198,12 @@ class _TransferScreenState extends State<TransferScreen> {
           )
       ),
       SizedBox(
-        height: 19,
+        height: 9,
       ),
     Column(
     children: [
     Padding(
-    padding: const EdgeInsets.only(right:300.0),
+    padding: const EdgeInsets.only(right:243.0),
     child:  Text(
           "Narration",
           style: TextStyle(fontSize: 12,
@@ -221,7 +215,7 @@ class _TransferScreenState extends State<TransferScreen> {
       ),
       Center(
           child: SizedBox(
-            width: 350,
+            width:  screenWidth * 0.9,
             height: 50,
             child: TextFormField(
                 controller: _remarksController,
@@ -245,11 +239,11 @@ class _TransferScreenState extends State<TransferScreen> {
           )
       ),
 
-              SizedBox(height: 32.0),
+              SizedBox(height: 28.0),
       Center(
         child: Container(
             height: 55,
-            width: 350,
+            width:  screenWidth * 0.9,
             decoration: BoxDecoration(
               color: Color(0XFFF24E00),
               borderRadius: BorderRadius.circular(30),
@@ -278,9 +272,9 @@ class _TransferScreenState extends State<TransferScreen> {
 
             ]
       ),
-      ]
-    )
+        ]
       )
-    );
+    )
+      );
   }
 }

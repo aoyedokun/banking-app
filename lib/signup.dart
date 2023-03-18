@@ -21,12 +21,18 @@ class _SignUpState extends State<SignUp> {
   final navigatorKey = GlobalKey<NavigatorState> ();
 
   bool _obscureText = true;
-  bool agree = true;
+  bool agree = false;
   bool _isAuthenticating = false;
 
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
+    double screenWidth = screenSize.width;
+    double screenHeight = screenSize.height;
+
+
+
+
     return Scaffold(
         resizeToAvoidBottomInset: false,
         extendBodyBehindAppBar: false,
@@ -45,222 +51,263 @@ class _SignUpState extends State<SignUp> {
     backgroundColor: Color(0xFFF24E00),
     ),
     body: SingleChildScrollView(
-    child: Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-    Padding(
-    padding: const EdgeInsets.only(left: 20.0, top: 20),
-    child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-    Text(
-    "Account Details",
-    style: TextStyle(
-    fontSize: 16,
-    color: Color(0xFFF24E00),
-    ),
-    ),
-    Image.asset(
-    "assets/Logo.png",
-    height: 60,
-    width: 60,
-    ),
-    ],
-    ),
-    ),
-      Padding(padding: EdgeInsets.symmetric(horizontal:20),
-        child: Column(
-          children:<Widget>[
-            inputFile(label: "FirstName",
-              hintStyle: TextStyle(color: Colors.grey, fontSize: 12),
-            ),
-            SizedBox(
-              height: 13
-            ),
-            inputFile(label: "LastName",
-                hintStyle: TextStyle(color: Colors.grey, fontSize: 12)),
-            SizedBox(
-                height: 13
-            ),
-            inputFile(label: "Email",
-              hintStyle: TextStyle(color: Colors.grey, fontSize: 12),
-              controller: _emailController,
-                validator: (value) {
-                  bool emailValid = RegExp(
-                      r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value!);
+              child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                            padding:EdgeInsets.fromLTRB(
+                                screenWidth / 20, screenHeight / 40, screenWidth / 20, 0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment
+                                    .spaceBetween,
+                                children: [
+                                  Text(
+                                    "Account Details",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: Color(0xFFF24E00),
+                                    ),
+                                  ),
+                                  Image.asset(
+                                    "assets/Logo.png",
+                                    height: screenWidth / 5,
+                                    width: screenWidth / 5,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: screenHeight / 30),
 
-                  if (value!.isEmpty) {
-                    return 'Please enter your correct address';
-                  }
+                                Padding(padding: EdgeInsets.symmetric(
+                                    horizontal: screenWidth / 20),
+                                    child: Column(
+                                        children: <Widget>[
+                                          inputFile(label: "First Name",
+                                            hintStyle: TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 12),
+                                          ),
+                                          SizedBox(
+                                              height: 13
+                                          ),
+                                          inputFile(label: "Last Name",
+                                              hintStyle: TextStyle(
+                                                  color: Colors.grey,
+                                                  fontSize: 12)),
+                                          SizedBox(
+                                              height: 13
+                                          ),
+                                          inputFile(label: "Email",
+                                              hintStyle: TextStyle(
+                                                  color: Colors.grey,
+                                                  fontSize: 12),
+                                              controller: _emailController,
+                                              validator: (value) {
+                                                bool emailValid = RegExp(
+                                                    r'^[\w-]+@([\w-]+\.)+[\w-]{2,4}$')
+                                                    .hasMatch(value!);
 
-                  else if (!emailValid) {
-                    return 'Please enter a valid email address';
-                  }
-                }
-            ),
+                                                if (value!.isEmpty) {
+                                                  return 'Please enter your correct address';
+                                                }
 
-            SizedBox(
-                height: 13
-            ),
-            inputFile(label: "password",
-              hintStyle: TextStyle(color: Colors.grey,
-                    fontSize: 12),
-              obscureText: _obscureText, toggleVisibility: (){
-              setState(() {
-                _obscureText = !_obscureText;
-              });
-            },
-              controller: _passwordController,
-          validator: (value) {
-            if (value!.isEmpty) {
-              return 'Please enter your password';
-            }
-            else if (value.length < 8) {
-              return 'Password must be at least 8 characters long';
-            }
+                                                else if (!emailValid) {
+                                                  return 'Please enter a valid email address';
+                                                }
+                                              }
+                                          ),
 
-          },
-            ),
-
-
-      SizedBox(
-      height: 30,
-      ),
-      Padding(
-        padding: const EdgeInsets.only(left:18.0),
-        child: Row(
-        children: [
-        Material(
-        child: Checkbox(
-        value: agree,
-        activeColor: Color(0xFFF24E00),
-        onChanged: (value) {
-        setState(() {
-        agree = value ?? false;
-        });
-        },
-        ),
-        ),
-          RichText(
-            textAlign: TextAlign.start,
-            text: TextSpan(
-              text: "I have read, understand and I agree to\n",
-              style: TextStyle(color: Colors.black),
-              children: [
-                TextSpan(
-                  text: "Ace`s Privacy Policy/Terms and Conditions",
-                  style: TextStyle(color: Color(0xFFF24E00)),
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => TermsAndConditionsScreen()),
-                      );
-                    },
-                ),
-              ],
-            ),
-          )
-
-          ]
-        ),
-      ),
-        SizedBox(
-        width: double.infinity,
-      height: 35,
-      ),
-
-      Center(
-        child: Container(
-        height: 55,
-        width: 350,
-        decoration: BoxDecoration(
-        color: Color(0XFFF24E00),
-        borderRadius: BorderRadius.circular(30),
-        ),
-        child:  _isAuthenticating // display loading widget when authenticating
-            ? Center(
-          child: CircularProgressIndicator(
-            valueColor:
-            AlwaysStoppedAnimation<Color>(Colors.white),
-          ),
-        )
-            : TextButton(
-        onPressed: () async{
-          setState(() {
-            _isAuthenticating = true;
-          });
-          try {
-            await FirebaseAuthService().signup(
-                _emailController.text.trim(),
-                _passwordController.text.trim());
-    Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
-          }
-          on FirebaseException catch (e) {
-            print(e.message);
-          } finally {
-            setState(() {
-              _isAuthenticating = false;
-            });
-          }
-    },
+                                          SizedBox(
+                                              height: 13
+                                          ),
+                                          inputFile(label: "password",
+                                            hintStyle: TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 12),
+                                            obscureText: _obscureText,
+                                            toggleVisibility: () {
+                                              setState(() {
+                                                _obscureText = !_obscureText;
+                                              });
+                                            },
+                                            controller: _passwordController,
+                                            validator: (value) {
+                                              if (value!.isEmpty) {
+                                                return 'Please enter your password';
+                                              }
+                                              else if (value.length < 8) {
+                                                return 'Password must be at least 8 characters long';
+                                              }
+                                            },
+                                          ),
 
 
+                                          SizedBox(
+                                            height: screenHeight / 30,
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(horizontal: screenWidth / 20),
+                                            child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Material(
+                                                    child: Checkbox(
+                                                      value: agree,
+                                                      activeColor: Color(
+                                                          0xFFF24E00),
+                                                      onChanged: (value) {
+                                                        setState(() {
+                                                          agree =
+                                                              value ?? false;
+                                                        });
+                                                      },
+                                                    ),
+                                                  ),
+                                    RichText(
+                                                    textAlign: TextAlign.start,
+                                                    text: TextSpan(
+                                                      text: "I have read,understand and I agree to\n",
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                        fontSize: 12,
+                                                      ),
+                                                      children: [
+                                                        TextSpan(
+                                                          text: "Ace`s Privacy Policy/Terms and Conditions",
+                                                          style: TextStyle(
+                                                              color: Color(
+                                                                  0xFFF24E00),
+                                                          ),
+                                                          recognizer: TapGestureRecognizer()
+                                                            ..onTap = () {
+                                                              Navigator.push(
+                                                                context,
+                                                                MaterialPageRoute(
+                                                                    builder: (
+                                                                        context) =>
+                                                                        TermsAndConditionsScreen()),
+                                                              );
+                                                            },
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  )
+                                    ]
+                                          )
+                                        ),
 
 
-            child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children:[
-        Text(
-        "Continue",
-        style: TextStyle(fontSize: 15, color: Colors.white),
-        ),
-        SizedBox(height: 5,
-        ),
-        ]
-        )
-        ),
-        ),
-      ),
-          GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LogIn()),
-                );
-              },
-child:
-      Container(
-      width: 250,
-      child:
-      Padding(
-        padding: const EdgeInsets.only(top:20.0),
+                                          SizedBox(
+                                              height: MediaQuery.of(context).size.height * 0.05),
 
-        child: RichText(
-        textAlign: TextAlign.center,
+                                          Center(
+                                            child: Container(
+                                              height: MediaQuery.of(context).size.height * 0.07,
+                                              width:  MediaQuery.of(context).size.width * 0.8,
+                                              decoration: BoxDecoration(
+                                                color: Color(0XFFF24E00),
+                                                borderRadius: BorderRadius
+                                                    .circular(30),
+                                              ),
+                                              child: _isAuthenticating // display loading widget when authenticating
+                                                  ? Center(
+                                                child: CircularProgressIndicator(
+                                                  valueColor:
+                                                  AlwaysStoppedAnimation<Color>(
+                                                      Colors.white),
+                                                ),
+                                              )
+                                                  : TextButton(
+                                                  onPressed: () async {
+                                                    setState(() {
+                                                      _isAuthenticating = true;
+                                                    });
+                                                    try {
+                                                      await FirebaseAuthService()
+                                                          .signup(
+                                                          _emailController.text
+                                                              .trim(),
+                                                          _passwordController
+                                                              .text.trim());
+                                                      Navigator.push(context,
+                                                          MaterialPageRoute(
+                                                              builder: (
+                                                                  context) =>
+                                                                  HomePage()));
+                                                    }
+                                                    on FirebaseException catch (e) {
+                                                      print(e.message);
+                                                    } finally {
+                                                      setState(() {
+                                                        _isAuthenticating =
+                                                        false;
+                                                      });
+                                                    }
+                                                  },
 
-        text: TextSpan(
-        text: "Have an account already ?  ",
-        style: TextStyle(color: Colors.black),
-        children: [
-        TextSpan(
-        text: "Login",
-        style: TextStyle(color:Color(0xFFF24E00)),
-        ),
-        ]
-        ),
-        ),
-      )
-      )
-          )
-                ]
-      )
-    )
-        ]
-    )
-    )
 
-      );
+                                                  child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment
+                                                          .center,
+                                                      children: [
+                                                        Text(
+                                                          "Continue",
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              color: Colors
+                                                                  .white),
+                                                        ),
+                                                        SizedBox(height: 5,
+                                                        ),
+                                                      ]
+                                                  )
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+                                          GestureDetector(
+                                              onTap: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          LogIn()),
+                                                );
+                                              },
+                                              child:
+                                              Container(
+                                                  width: MediaQuery.of(context).size.width * 0.8,
+                                                  child:
+                                                   RichText(
+                                                      textAlign: TextAlign
+                                                          .center,
+
+                                                      text: TextSpan(
+                                                          text: "Have an account already ?  ",
+                                                          style: TextStyle(
+                                                              color: Colors
+                                                                  .black),
+                                                          children: [
+                                                            TextSpan(
+                                                              text: "Login",
+                                                              style: TextStyle(
+                                                                  color: Color(
+                                                                      0xFFF24E00)),
+                                                            ),
+                                                          ]
+                                                      ),
+                                                    ),
+                                                  )
+                                              )
+
+                                        ]
+                                    )
+                                )
+
+                          ]
+                      )
+                  )
+              );
   }
 }
 Widget inputFile({label, obscureText = false, toggleVisibility,

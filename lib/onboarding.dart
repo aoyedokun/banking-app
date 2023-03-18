@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:new_learn/login.dart';
 
@@ -30,8 +30,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return Scaffold(
       backgroundColor: Color(0XFFE5E5E5),
       body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
       Expanded(
+        flex: 5,
         child: PageView.builder(
         itemCount: contents.length,
         onPageChanged: (int index){
@@ -44,19 +46,31 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             padding: const EdgeInsets.all(30.0),
             child: Column(
               children: [
+                Flexible(
+            flex:4,
+                child:
                 Image.asset(contents[i].image,
                 height: 330,
+                ),
                 ),
                 SizedBox(
                   height: 19,
                 ),
+            Flexible(
+                flex: 2,
+                child:
                 Text(
                 contents[i].title,
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                )
                 ),
+          textAlign: TextAlign.center,
+                ),
+            ),
+          Flexible(
+          flex: 2,
+          child:
                 Text(
                 contents[i].discription,
                     textAlign: TextAlign.center,
@@ -65,13 +79,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       color: Colors.black,
                     ),
                 )
+          ),
               ]
             ),
           );
-        }
+        },
+          controller: _controller,
       )
     ),
     Container(
+        height: MediaQuery.of(context).size.height * 0.05,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
     children: List.generate(
@@ -80,8 +97,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     )
     )
     ),
-
-    Container(
+        Flexible(
+            flex: 1,
+            child:
+            Container(
     height: 55,
     margin: EdgeInsets.all(15),
     width: double.infinity,
@@ -101,8 +120,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             borderRadius: new BorderRadius.only(
                 topLeft: const Radius.circular(25.0),
                 topRight: const Radius.circular(25.0))),
-    child:Column(
 
+        child:ListView(
     children:[
     ListTile(
     leading:Image.asset( "assets/nig.png"),
@@ -182,8 +201,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       )
       )
     ),
-
-      Container(
+        ),
+        Flexible(
+            flex: 1,
+            child:
+            Container(
       height: 55,
       margin: EdgeInsets.all(15),
     width: double.infinity,
@@ -208,6 +230,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     )
     )
     )
+        )
     ]
       )
     );

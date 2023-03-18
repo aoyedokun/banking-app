@@ -29,10 +29,9 @@ class _FlashScreenState extends State<FlashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return InitWidget();
-  }
+    final Size screenSize = MediaQuery.of(context).size;
 
-  Widget InitWidget() {
+
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -54,16 +53,17 @@ class _FlashScreenState extends State<FlashScreen> {
               Column(
                 children: [
                   Image.asset("assets/Logo.png",
-                    height: 160,
-                    width: 214,
+                    height: screenSize.height * 0.25,
+                    width: screenSize.width * 0.6,
           ),
+                  SizedBox(height: screenSize.height * 0.05),
               Text(
                 "A step closer to\n"
                          "freedom",
                 textAlign: TextAlign.start,
                 style: TextStyle(
     color: Colors.black,
-    fontSize: 28,
+    fontSize:screenSize.width * 0.06,
 
 
     ),

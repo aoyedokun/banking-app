@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CustomSearchDelegate extends SearchDelegate {
   List<String> searchTerms = [
-    'Access Bank'
+    'Access Bank',
     'Citibank',
     'Diamond Bank',
     'Ecobank',

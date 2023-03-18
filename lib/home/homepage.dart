@@ -21,6 +21,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+
+    var screenSize = MediaQuery.of(context).size;
+
+
     return Scaffold(
         appBar: AppBar(
             backgroundColor: Color(0xFFF24E00),
@@ -49,17 +53,22 @@ class _HomePageState extends State<HomePage> {
                 child: Stack(
                   children: [
                   Container(
-                        height: 188,
+                        height: MediaQuery.of(context).size.height * 0.29,
                         width: double.infinity,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                               colors: [Color(0xFFF24E00),
                                 Color(0xFFE18354)]),
                         ),
-                        child: Column(children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 1.0),
-                            child: Row(
+                        child: Column(
+                            children: [
+                              Padding(
+                                  padding: EdgeInsets.only(
+                                    top: MediaQuery.of(context).size.height * 0.02,
+                                    left: MediaQuery.of(context).size.width * 0.05,
+                                    right: MediaQuery.of(context).size.width * 0.05,
+                                  ),
+                              child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
 
@@ -78,8 +87,8 @@ class _HomePageState extends State<HomePage> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Container(
-                                      width: 80.0,
-                                      height: 80.0,
+                                      width:MediaQuery.of(context).size.width * 0.2,
+                                      height: MediaQuery.of(context).size.width * 0.2,
                                       decoration: BoxDecoration(
                                         color: Color(0xFFF0B79C),
                                         boxShadow: [
@@ -106,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                                   SizedBox(
                                     width: 6,),
                                   Column(children: [
-                                    Text("Hello Ethan", style: TextStyle(
+                                    Text("Hello Ayo", style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600,
                                         color: Colors.white),
@@ -132,10 +141,10 @@ class _HomePageState extends State<HomePage> {
         ),
                     Center(
                           child: Padding(
-                            padding: const EdgeInsets.only(top:93.0),
+                            padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15),
                             child: Container(
-                              height: 125,
-                              width: 290,
+                              width: MediaQuery.of(context).size.width * 0.8,
+                              height: MediaQuery.of(context).size.height * 0.2,
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(colors: [Color(0xFFE18354),
                                   Color(0xFFF24E00)]),
@@ -156,7 +165,7 @@ class _HomePageState extends State<HomePage> {
                                         Text("Current Account",
                                             style: TextStyle(
                                               fontWeight: FontWeight.w600,
-                                              fontSize: 14,
+                                              fontSize:  MediaQuery.of(context).size.width * 0.05,
                                               color: Colors.white,
                                             )),
                                         IconButton(
@@ -181,12 +190,11 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                   SizedBox(
-                                      height: 13
+                                      height: MediaQuery.of(context).size.height * 0.01,
                                   ),
-
-                                      Container(
-                                        height: 40,
-                                        width: 255,
+                                  Container(
+                                        width:  MediaQuery.of(context).size.width * 0.6,
+                                    height: MediaQuery.of(context).size.height * 0.06,
                                         decoration: BoxDecoration(
                                             color: Colors.transparent,
                                             borderRadius: BorderRadius.circular(5.0),
@@ -200,7 +208,7 @@ class _HomePageState extends State<HomePage> {
                                           child: Text('₦342,000.00',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w600,
-                                                fontSize: 18,
+                                                fontSize:  MediaQuery.of(context).size.width * 0.05,
                                                 color: Colors.white,
                                               )
                                           ),
@@ -213,9 +221,9 @@ class _HomePageState extends State<HomePage> {
                         ),
 
                     Padding(
-                      padding: const EdgeInsets.only(top:227.0),
+                      padding: const EdgeInsets.only(top:190.0),
                       child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 15),
+                          padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.05),
                           color: Colors.white,
                           child: Column(
                               children: [
@@ -232,13 +240,16 @@ class _HomePageState extends State<HomePage> {
                                           },
                                           child:
                                           buildActivityButton(
+                                            context,
                                               Icons.mobile_friendly,
                                               "Buy Airtime",
                                               Colors.white.withOpacity(0.3),
-                                              Color(0xFFE18354)
+                                              Color(0xFFE18354),
+
                                           ),
                                         ),
                                         buildActivityButton(
+                                          context,
                                             Icons
                                                 .account_balance_wallet_outlined,
                                             "Pay Bills",
@@ -264,6 +275,7 @@ class _HomePageState extends State<HomePage> {
                                         },
                                         child:
                                         buildActivityButton(
+                                          context,
                                             Icons
                                                 .transit_enterexit_outlined,
                                             "Transfer",
@@ -272,6 +284,7 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                                       buildActivityButton(
+                                        context,
                                           Icons.send_to_mobile_outlined,
                                           "Buy Data",
                                           Colors.white.withOpacity(0.3),
@@ -287,12 +300,14 @@ class _HomePageState extends State<HomePage> {
                                         .spaceBetween,
                                     children: [
                                       buildActivityButton(
+                                        context,
                                           Icons.send_outlined,
                                           "FX Purchase",
                                           Colors.white.withOpacity(0.3),
                                           Color(0xFFE18354)
                                       ),
                                       buildActivityButton(
+                                        context,
                                           Icons.qr_code_2,
                                           "QR Code",
                                           Colors.white.withOpacity(0.3),
@@ -300,10 +315,10 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ]
                                 ),
-                              ]
-                          )
-                      ),
+                        ]
+                      )
                     ),
+            ),
                           Padding(
                           padding: const EdgeInsets.only(top:469.0),
     child: Container(
@@ -505,11 +520,11 @@ SizedBox(
 
   }
   }
-  Container buildActivityButton(IconData icon, String title,
+  Container buildActivityButton( BuildContext context, IconData icon, String title,
   Color backgroundColor, Color iconColor) {
   return Container(
-  height: 70,
-  width: 160,
+  height:MediaQuery.of(context).size.height * 0.15,
+      width: MediaQuery.of(context).size.width * 0.4,
   decoration: BoxDecoration(
   color: backgroundColor,
   borderRadius: BorderRadius.circular(10.0),
@@ -519,19 +534,20 @@ SizedBox(
   ),
   ),
   child: Padding(
-  padding: const EdgeInsets.all(8.0),
+  padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.03),
   child: Column(
   children: [
   Icon(
   icon,
   color: iconColor,
+    size: MediaQuery.of(context).size.width * 0.1,
   ),
   SizedBox(
-  height: 10,
+  height: MediaQuery.of(context).size.height * 0.01,
   ),
   Text(title,
   style: TextStyle(
-  fontSize: 12,
+  fontSize: MediaQuery.of(context).size.width * 0.04,
   color: Colors.black),)
   ],
   ),
